@@ -17,19 +17,15 @@
 
 <script> 
     import Nav  from './components/Nav.vue';
-    
-
   
-
 export default {
   name: 'App',
   components:{
-    Nav,
-    
-
-  } 
- 
+    Nav
+  }
+  
 }
+
 </script>
 
 <style>
@@ -109,8 +105,4 @@ export default {
 .forgot-password a {
   color: #167bff; 
 }
-
-
-
-
 </style>
