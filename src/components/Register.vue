@@ -3,12 +3,7 @@
     <form @submit.prevent="handleSubmit" >
         <h3>Sign Up</h3>
 
-            <div class="form-group">
-
-            <label>Student Number</label>
-            <input type="text" class="form-control" v-model="student_No" placeholder="Student Number">
-        </div>
-
+           
         <div class="form-group">
 
             <label>Email</label>
@@ -36,14 +31,18 @@
 </template>
 
 <script>
-import axios from 'axios'
+
+   import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+   
+
+
 export default {
     name: 'Register',
     methods:{
 
         data() {
             return {
-                student_No:'',
+               
                 email:'',
                 password:'',
                 password_cornfirm:''
@@ -54,7 +53,6 @@ export default {
         
             const data = {
 
-                student_No:this.student_No,
                 email:this.email,
                 password:this.password,
                 password_cornfirm:this.password_cornfirm
@@ -62,17 +60,33 @@ export default {
             
             console.log(data)
 
-         axios.post('http://localhost:8000/register',data)
+                if(data.password!==data.password_cornfirm)
+            {
+                alert("Password and Password cornfirm are not the same, Please resubmit");
+            }else
+            {
+                    const auth = getAuth();
+                    var email=data.email;
+                    var password=data.password;
 
-         .then(
-             res =>{
-                 console.log(res);
-             }
-         ).catch(
-             err=>{
-                 console.log(err);
-             }
-         )
+                createUserWithEmailAndPassword(auth, email,password)
+                
+                .then((userCredential) => {
+                    // Signed in 
+                  const  user = userCredential.user;
+                    // ...
+                    console.log("You have signed up");
+                    console.log(user.email);
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    // ..
+                    alert(errorCode+"\t"+errorMessage);
+                    console.log(errorMessage);
+                });
+           }
+          
         }
     }
 }

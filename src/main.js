@@ -36,28 +36,6 @@ const app = initializeApp(firebaseConfig);
 
 Vue.config.productionTip = false
 
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-
-var email="boitumelotshehla@gmail.com";
-var password="Boitumelo@21"
-
-const auth = getAuth();
-createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    // ...
-    console.log("You have signed up");
-    console.log(user);
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-    alert(errorCode+"\t"+errorMessage);
-    console.log(errorMessage);
-  });
- console.log(app);
 new Vue({
   router,
   render: h => h(App),

@@ -1,18 +1,18 @@
 <template>
-    <form >
+    <form @submit.prevent="handleSubmit" >
 
         <h3>Login</h3>
 
     <div class="form-group">
 
         <label>Email</label>
-        <input type="email" class="form-control" placeholder="Emai"/>
+        <input type="email"  v-model="email" class="form-control" placeholder="Emai"/>
 
     </div>
     <div class="form-group">
 
         <label >Password</label>
-        <input type="password" class="form-control" placeholder="Password"/>
+        <input type="password" v-model="password" class="form-control" placeholder="Password"/>
 
     </div>
 
@@ -24,7 +24,51 @@
 </template>
 
 <script>
+
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 export default {
-    name:'Login'
+    name:'Login',
+
+    methods:{
+
+        data() {
+            return {
+                email:'',
+                password:''
+            }
+        },
+
+        handleSubmit(){
+
+
+            const data ={
+                email:this.email,
+                password:this.password
+            }
+
+            var email=data.email;
+            var password=data.password;
+
+            const auth = getAuth();
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    alert("Welcom back ",user.email);
+                    // ...
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+
+                    console.log(errorCode+"\t\t"+errorMessage);
+                });
+
+        }
+
+
+    }
+
 }
 </script>
