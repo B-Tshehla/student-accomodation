@@ -2,15 +2,17 @@
    <div id="app">
      <Nav/>
       
+       
+
       <div class="auth-wrapper">
         
         <div class="auth-inner">
           
-          <router-view/>
+         <router-view/>
          
         </div>
 
-      </div>
+      </div> 
 
   </div>
 </template>

@@ -26,6 +26,8 @@
             Sign Up
         </button>
 
+        
+
     </form>
 
 </template>
