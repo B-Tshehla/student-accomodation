@@ -2,19 +2,28 @@
     <form @submit.prevent="handleSubmit" >
 
         <h3>Login</h3>
-
+   
+ 
     <div class="form-group">
 
-        <label>Email</label>
+        <label>
+            <b-icon icon="person-fill" scale="1.5" ></b-icon>
+            Email
+        </label>
         <input type="email"  v-model="email" class="form-control" placeholder="Emai"/>
 
     </div>
     <div class="form-group">
 
-        <label >Password</label>
+        <label >
+            <b-icon icon="shield-lock-fill" scale="1.25"  ></b-icon>
+            Password
+        </label>
         <input type="password" v-model="password" class="form-control" placeholder="Password"/>
 
     </div>
+
+ 
 
     <button class="btn btn-primary btn-block">Login</button>
 
@@ -72,3 +81,15 @@ export default {
 
 }
 </script>
+
+<style>
+    label{
+        padding-bottom: 5px;
+        padding-top: 5px;
+        size: 2em;
+        
+    }
+
+  
+
+</style>
