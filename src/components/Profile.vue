@@ -124,7 +124,12 @@
 </template>
 
 <script>
+
+import { collection, addDoc } from "firebase/firestore"; 
+import { getFirestore } from "firebase/firestore";
+
 export default {
+
     name:'Profile',
 
     data() {
@@ -156,26 +161,35 @@ export default {
         }
       },
 
-      handleSubmit(){
+     async handleSubmit(){
         
-        const data ={
-          firstName:this.fName,
-          lastName:this.lName,
-          idNum:this.idNum,
-          conNum:this.conNum,
-          street:this.street,
-          suburb:this.suburb,
-          pCode:this.pCode,
-          province:this.province,
-          kfName:this.kfName,
-          klName:this.klName,
-          kconNum:this.kconNum,
-          realation:this.realation,
-          medHistory:this.medHistory
-        }
+     
+          
+       // console.log(data);
+        const db = getFirestore();
+        try {
+                const docRef = await addDoc(collection(db, "users"), {
+                firstName:this.fName,
+                lastName:this.lName,
+                idNum:this.idNum,
+                conNum:this.conNum,
+                street:this.street,
+                suburb:this.suburb,
+                pCode:this.pCode,
+                province:this.province,
+                kfName:this.kfName,
+                klName:this.klName, 
+                kconNum:this.kconNum,
+                realation:this.realation,
+                medHistory:this.medHistory
+                });
+                console.log("Document written with ID: ", docRef.id);
+              } catch (e) {
+                console.error("Error adding document: ", e);
+            }
+ 
+      },
 
-        console.log(data);
-      }
 
     }
 }

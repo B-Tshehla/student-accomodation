@@ -2,8 +2,9 @@
     <form @submit.prevent="handleSubmit" >
 
         <h3>Login</h3>
-   
- 
+     
+     
+
     <div class="form-group">
 
         <label>
@@ -25,8 +26,8 @@
 
  
 
-    <button class="btn btn-primary btn-block">Login</button>
-
+   <button class="btn btn-primary btn-block">Login</button>
+   <!-- <b-button  variant="primary">Primary</b-button>-->
     </form>
         
     
@@ -43,8 +44,8 @@ export default {
 
         data() {
             return {
-                email:'',
-                password:''
+                email:null,
+                password:null
             }
         },
 
@@ -86,8 +87,7 @@ export default {
     label{
         padding-bottom: 5px;
         padding-top: 5px;
-        size: 2em;
-        
+        size: 2em   
     }
 
   
