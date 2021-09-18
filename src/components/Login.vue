@@ -65,7 +65,8 @@ export default {
                 .then((userCredential) => {
                     // Signed in 
                     const user = userCredential.user;
-                    alert("Welcom back ",user.email);
+                    console.log(user);
+                    this.$router.push('/');
                     // ...
                 })
                 .catch((error) => {
@@ -74,6 +75,8 @@ export default {
 
                     alert(errorCode+"\t\t"+errorMessage);
                 });
+
+                
 
         }
 

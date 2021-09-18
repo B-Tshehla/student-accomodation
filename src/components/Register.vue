@@ -79,6 +79,7 @@ export default {
                     // ...
                     console.log("You have signed up");
                     console.log(user.email);
+                    this.$router.push('/Login');
                 })
                 .catch((error) => {
                     const errorCode = error.code;

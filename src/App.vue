@@ -8,7 +8,7 @@
         
         <div class="auth-inner">
           
-         <router-view/>
+         <router-view :user="user"/>
          
         </div>
 
@@ -19,12 +19,43 @@
 
 <script> 
     import Nav  from './components/Nav.vue';
+    import { getAuth, onAuthStateChanged } from "firebase/auth";
   
 export default {
   name: 'App',
   components:{
     Nav
-  }
+  },
+    data() {   
+        return {
+            user:null,
+        }
+        
+    },
+
+   async  created() {
+
+           const auth = getAuth();
+        onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            const uid = user.uid;
+            const email= user.email;
+            // ...
+
+            this.user=user;
+
+            console.log(uid+"\t"+email);
+        } else {
+            // User is signed out
+            // ...
+
+            console.log("You have not signed in. please click login");
+        }
+        });
+            
+        },
   
 }
 

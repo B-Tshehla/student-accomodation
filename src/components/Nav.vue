@@ -2,18 +2,28 @@
    
     <nav class="navbar navbar-expand navbar-light fixed-top">
       <div class="container">
-        <a href="/" class="navbar-brand">Home</a>
+        <router-link to="/" class="navbar-brand">Home</router-link>
         <div class="collapse navbar-collapse">
-          <ul class="navbar-nav ml-auto">
+          <ul class="navbar-nav ml-auto" v-if="user">
             <li class="nav-item">
-              <a href="/Login" class="nav-link">Login </a>
+              <router-link to="/Login" class="nav-link">Login </router-link>
             </li>
                 <li class="nav-item">
-                  <a href="/register" class="nav-link"> Sign up </a>
+                  <router-link to="/register" class="nav-link"> Sign up </router-link>
+                </li>
+                 
+               
+          </ul>
+          <ul class="navbar-nav ml-auto" v-if="!user">
+            <li class="nav-item">
+              <router-link to="/Login" class="nav-link">Login </router-link>
+            </li>
+                <li class="nav-item">
+                  <router-link to="/register" class="nav-link"> Sign up </router-link>
                 </li>
                  
                 <li class="nav-item">
-                  <a href="#" class="nav-link"> Log out </a>
+                  <a  href="#"  class="nav-link"> Log out </a>
                 </li>
           </ul>
 
@@ -25,6 +35,8 @@
 
 <script>
 export default {
-    name: 'Nav'
+    name: 'Nav',
+    props:['user'],
+
 }
 </script>
