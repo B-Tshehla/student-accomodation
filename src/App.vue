@@ -62,7 +62,9 @@ export default {
 </script>
 
 <style>
-    @import url('https:fonts.googleapis.com/css?family=fira+Sans:400,500,600,700,800');
+ 
+ 
+ @import url('https:fonts.googleapis.com/css?family=fira+Sans:400,500,600,700,800');
 
     *{
       box-sizing: border-box;
@@ -102,7 +104,7 @@ export default {
   text-align: left;
 }
 .auth-inner{
-  width: 450px;
+  width: 750px;
   margin: auto;
   background-color: #ffffff;
   box-shadow: 0px 14px 80px rgba( 34 ,35,58,0.2); 

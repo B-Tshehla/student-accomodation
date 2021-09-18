@@ -1,35 +1,38 @@
 <template>
-    <form @submit.prevent="handleSubmit" >
-
-        <h3>Login</h3>
+    <div>
+  <b-form @submit.prevent>
+      <h3>Sign in</h3>
+      <div>
+            <label for="email">Email:</label>
+                <b-form-input  
+                    type="email" 
+                    id="email" 
+                    placeholder="Email"
+                    required
+                    v-model="email">
+                </b-form-input>
+                
+      </div>
+      
+   
+    <div>
+        <label for="text-password">Password</label>
+        <b-form-input 
+        type="password" 
+        id="text-password" 
+        placeholder="Password"
+        v-model="password">
+        </b-form-input>
      
-     
-
-    <div class="form-group">
-
-        <label>
-            <b-icon icon="person-fill" scale="1.5" ></b-icon>
-            Email
-        </label>
-        <input type="email"  v-model="email" class="form-control" placeholder="Emai"/>
-
-    </div>
-    <div class="form-group">
-
-        <label >
-            <b-icon icon="shield-lock-fill" scale="1.25"  ></b-icon>
-            Password
-        </label>
-        <input type="password" v-model="password" class="form-control" placeholder="Password"/>
-
+       
     </div>
 
- 
-
-   <button class="btn btn-primary btn-block">Login</button>
-   <!-- <b-button  variant="primary">Primary</b-button>-->
-    </form>
-        
+    <div>
+            <b-button block variant="primary" @click="handleSubmit">Submit</b-button>
+    </div>
+    
+   </b-form>
+</div>
     
 </template>
 
