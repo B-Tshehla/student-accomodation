@@ -1,6 +1,6 @@
 <template>
    <div id="app">
-     <Nav/>
+     <Nav :user="user"/>
       
        
 
@@ -104,7 +104,7 @@ export default {
   text-align: left;
 }
 .auth-inner{
-  width: 750px;
+  width: 500px;
   margin: auto;
   background-color: #ffffff;
   box-shadow: 0px 14px 80px rgba( 34 ,35,58,0.2); 

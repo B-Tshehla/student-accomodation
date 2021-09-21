@@ -30,8 +30,17 @@
     <div>
             <b-button block variant="primary" @click="handleSubmit">Submit</b-button>
     </div>
-    
+            
    </b-form>
+
+    <b-modal ref="my-modal" hide-footer title="error message">
+      <div class="d-block  text-center">
+        <h3>{{"hey"}}</h3>
+      </div>
+      <b-button class="mt-3" variant="outline-danger" block @click="hideModal">Close Me</b-button>
+      
+    </b-modal>
+
 </div>
     
 </template>
@@ -48,7 +57,8 @@ export default {
         data() {
             return {
                 email:null,
-                password:null
+                password:null,
+                errorCode:'hey'
             }
         },
 
@@ -57,11 +67,15 @@ export default {
 
             const data ={
                 email:this.email,
-                password:this.password
+                password:this.password,
+                
+
             }
 
             var email=data.email;
             var password=data.password;
+                
+                this.$refs['my-modal'].show()
 
             const auth = getAuth();
             signInWithEmailAndPassword(auth, email, password)
@@ -74,13 +88,17 @@ export default {
                 })
                 .catch((error) => {
                     const errorCode = error.code;
-                    const errorMessage = error.message;
+                   // const errorMessage = error.message;
+                    this.errorCode=errorCode;
 
-                    alert(errorCode+"\t\t"+errorMessage);
+                  //  alert(errorCode+"\t\t"+errorMessage);
                 });
 
                 
 
+        },
+        hideModal() {
+        this.$refs['my-modal'].hide();
         }
 
 

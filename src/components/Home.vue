@@ -17,7 +17,10 @@
 
                     
 
-            </div>         
+            </div>   
+            
+
+
         </div>
         <div v-if="!user">
             <h3>You are not logged in</h3> 
