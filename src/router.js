@@ -5,6 +5,7 @@ import Login from './components/Login.vue'
 import Register from './components/Register.vue'
 import Profile from './components/Profile.vue'
 import Message  from './components/alert.vue'
+import Upload   from './components/Upload.vue'
 
 Vue.use(Router)
 
@@ -16,6 +17,8 @@ export default new Router({
         {path:'/register', component:Register},
         {path:'/profile',component:Profile},
         {path:'/alert',component:Message},
+        {path:'/Upload',component:Upload},
+        
         
 
     ]
