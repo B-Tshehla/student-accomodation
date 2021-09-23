@@ -12,7 +12,7 @@
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                             
                             
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <a href="#" @click="handleUser" class="btn btn-primary">Go somewhere</a>
                     </div>
 
                     
@@ -31,12 +31,22 @@
 
 <script>
  
-
+import { getFirestore } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 export default {
     
     name:'Home',
-    props:['user']
+    props:['user'],
+    methods:{
+      async  handleUser(){
+            const db = getFirestore();
+            const querySnapshot = await getDocs(collection(db, "users"));
+            querySnapshot.forEach((doc) => {
+            console.log(`${doc.id} => ${doc.get()}`);
+            });
+        }
+    }
 
      
 
