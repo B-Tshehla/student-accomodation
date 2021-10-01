@@ -64,7 +64,7 @@ export default {
 <style>
  
  
- @import url('https:fonts.googleapis.com/css?family=fira+Sans:400,500,600,700,800');
+ /*@import url('https:fonts.googleapis.com/css?family=fira+Sans:400,500,600,700,800');*/
 
     *{
       box-sizing: border-box;

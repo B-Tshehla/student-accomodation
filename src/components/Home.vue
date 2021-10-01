@@ -8,11 +8,55 @@
                 <img class="img-thumbnail" :src="require('../../images/profile_icon.png')" alt="Thumbnail image">
               <!--  <img :src="require('../../images/profile_icon.png')" class="card-img-top" alt="Profile Picture"> -->
                     <div class="card-body">
-                        <h5 class="card-title">{{user.email}}</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h5 class="card-title">Personal Details</h5>
                             
-                            
-                                <a href="#" @click="handleUser" class="btn btn-primary">Go somewhere</a>
+                            <p class="card-text">
+                                Name:{{this.firstName}}
+                            </p>
+                            <p class="card-text">
+                                Surname:{{this.lastName}}
+                            </p>
+                             <p class="card-text">
+                                Identity Number:{{this.conNum}}
+                            </p>
+                             <p class="card-text">
+                                Contact Number:{{conNum}}
+                            </p>
+
+                            <h5 class="card-title">Address Information</h5>
+                              <p class="card-text">
+                                Street:{{street}}
+                            </p>
+                             <p class="card-text">
+                                Suburb:{{suburb}}
+                            </p>
+                             <p class="card-text">
+                                Postal Code:{{pCode}}
+                            </p>
+                             <p class="card-text">
+                                Province:{{province}}
+                            </p>
+
+                            <h5 class="card-title">Next Of Kin Information</h5>
+                            <p class="card-text">
+                                Name:{{kfName}}
+                            </p>
+                            <p class="card-text">
+                                Surname:{{kfName}}
+                            </p>
+                            <p class="card-text">
+                                Contact Number:{{kconNum}}
+                            </p>
+                            <p class="card-text">
+                                Realationship:{{realation}}
+                            </p>
+                            <p class="card-text">
+                                Medical History:{{medHistory}}
+                            </p>
+
+
+                           
+                                <a href="#" @click="handleUser" class="btn btn-primary">Get Data</a>
                     </div>
 
                     
@@ -30,21 +74,61 @@
 </template>
 
 <script>
- 
+
+import { doc, getDoc } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
-import { collection, getDocs } from "firebase/firestore";
 
 export default {
     
     name:'Home',
     props:['user'],
+    data() {
+        return {
+            firstName:'',
+            lastName:'',
+            idNum:'',
+            conNum:'',
+            street:'',
+            suburb:'',
+            pCode:'',
+            province:'',
+            kfName:'',
+            kflName:'',
+            kconNum:'',
+            realation:'',
+            medHistory:''
+        }
+    },
     methods:{
       async  handleUser(){
-            const db = getFirestore();
-            const querySnapshot = await getDocs(collection(db, "users"));
-            querySnapshot.forEach((doc) => {
-            console.log(`${doc.id} => ${doc.get()}`);
-            });
+         const db = getFirestore();
+
+            const docRef = doc(db, "users", "12etCoXGBzg4x9d7dsTC");
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+            this.firstName=docSnap.data().firstName;
+            this.lastName=docSnap.data().lastName;
+            this.idNum=docSnap.data().idNum;
+            this.conNum=docSnap.data().conNum;
+            this.street=docSnap.data().street;
+            this.suburb=docSnap.data().suburb;
+            this.pCode=docSnap.data().pCode;
+            this.province=docSnap.data().province;
+            this.kfName=docSnap.data().kfName;
+            this.kflName=docSnap.data().kflName;
+            this.kconNum=docSnap.data().kconNum;
+            this.realation=docSnap.data().realation;
+            this.medHistory=docSnap.data().medHistory;
+            } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+            }
+           
+
+                    
+
         }
     }
 

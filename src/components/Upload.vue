@@ -19,6 +19,7 @@
 
       <div class="d-flex justify-content-center">
          <b-button ref="submit" type="submit" :disabled="busy">Submit</b-button>
+         <b-button @click="upload" >Upload</b-button>
       </div>
 
       <b-overlay :show="busy" no-wrap @shown="onShown" @hidden="onHidden">
@@ -60,8 +61,8 @@
 
 <script>
 
-
-
+   import { getStorage, ref } from "firebase/storage";     
+      
 
   export default {
       name:'Upload',
@@ -101,8 +102,8 @@
       },
       onOK() {
         this.counter = 1;
-        this.processing = true; 
-       
+        this.processing = true;
+        this.upload();
   
         // Simulate an async request
         this.clearInterval()
@@ -117,8 +118,26 @@
           }
         }, 350)
 
+     
       },
+      upload(){
+     
 
+        // Create a root reference
+          const storage = getStorage();
+
+          // Create a reference to 'mountains.jpg'
+          const mountainsRef = ref(storage, 'mountains.jpg');
+
+          // Create a reference to 'images/mountains.jpg'
+          const mountainImagesRef = ref(storage, '../../images/profile_icon.png');
+
+          // While the file names are the same, the references point to different files
+          mountainsRef.name === mountainImagesRef.name;           // true
+          mountainsRef.fullPath === mountainImagesRef.fullPath;   // false 
+        console.log("upload function is working");
+
+      }
     }
   }
 </script>

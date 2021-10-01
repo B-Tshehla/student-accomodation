@@ -4,6 +4,9 @@ import router from './router'
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+
+
 
 
 
@@ -24,7 +27,7 @@ const firebaseConfig = {
   projectId: "accomodationapp-fec16",
  
 
-  storageBucket: "accomodationapp-fec16.appspot.com",
+  storageBucket: "gs://accomodationapp-fec16.appspot.coms",
 
   messagingSenderId: "504433362980",
 
@@ -36,7 +39,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
-
+const storage = getStorage(app);
 
 
 Vue.config.productionTip = false;
@@ -47,5 +50,6 @@ new Vue({
   app,
   db,
   router,
+  storage,
   render: h => h(App),
 }).$mount('#app')
