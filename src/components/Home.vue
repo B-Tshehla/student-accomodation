@@ -5,7 +5,7 @@
             
             
             <div class="card justify-content-center"  style="width: 20rem;">
-                <img class="img-thumbnail" :src="require('../../images/profile_icon.png')" alt="Thumbnail image">
+             <!--   <img class="img-thumbnail" :src="require('../../images/profile_icon.png')" alt="Thumbnail image"> -->
               <!--  <img :src="require('../../images/profile_icon.png')" class="card-img-top" alt="Profile Picture"> -->
                     <div class="card-body">
                         <h5 class="card-title">Personal Details</h5>
@@ -17,7 +17,7 @@
                                 Surname:{{this.lastName}}
                             </p>
                              <p class="card-text">
-                                Identity Number:{{this.conNum}}
+                                Identity Number:{{this.idNum}}
                             </p>
                              <p class="card-text">
                                 Contact Number:{{conNum}}
@@ -42,7 +42,7 @@
                                 Name:{{kfName}}
                             </p>
                             <p class="card-text">
-                                Surname:{{kfName}}
+                                Surname:{{klName}}
                             </p>
                             <p class="card-text">
                                 Contact Number:{{kconNum}}
@@ -93,7 +93,7 @@ export default {
             pCode:'',
             province:'',
             kfName:'',
-            kflName:'',
+            klName:'',
             kconNum:'',
             realation:'',
             medHistory:''
@@ -101,9 +101,9 @@ export default {
     },
     methods:{
       async  handleUser(){
-         const db = getFirestore();
-
-            const docRef = doc(db, "users", "12etCoXGBzg4x9d7dsTC");
+            const db = getFirestore();
+            const userId=this.user.uid;
+            const docRef = doc(db, "users", userId);
             const docSnap = await getDoc(docRef);
 
             if (docSnap.exists()) {
@@ -117,10 +117,11 @@ export default {
             this.pCode=docSnap.data().pCode;
             this.province=docSnap.data().province;
             this.kfName=docSnap.data().kfName;
-            this.kflName=docSnap.data().kflName;
+            this.klName=docSnap.data().klName;
             this.kconNum=docSnap.data().kconNum;
             this.realation=docSnap.data().realation;
             this.medHistory=docSnap.data().medHistory;
+            
             } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");

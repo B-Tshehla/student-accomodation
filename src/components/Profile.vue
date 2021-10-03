@@ -125,13 +125,15 @@
 
 <script>
 
-import { collection, addDoc } from "firebase/firestore"; 
+//import { collection, addDoc } from "firebase/firestore"; 
+import { doc, setDoc } from "firebase/firestore"; 
 import { getFirestore } from "firebase/firestore";
+
 
 export default {
 
     name:'Profile',
-
+     props:['user'],
     data() {
       return {
         tabIndex: 1,
@@ -162,13 +164,12 @@ export default {
       },
 
      async handleSubmit(){
-        
-     
-          
-       // console.log(data);
+
         const db = getFirestore();
-        try {
-                const docRef = await addDoc(collection(db, "users"), {
+        const userId=this.user.uid;
+        // Add a new document in collection "users"
+        await setDoc(doc(db, "users", userId), {
+
                 firstName:this.fName,
                 lastName:this.lName,
                 idNum:this.idNum,
@@ -182,13 +183,8 @@ export default {
                 kconNum:this.kconNum,
                 realation:this.realation,
                 medHistory:this.medHistory
-                });
-                console.log("Document written with ID: ", docRef.id);
-              } catch (e) {
-                console.error("Error adding document: ", e);
-            }
-
-
+         
+        });
  
       },
 
