@@ -46,7 +46,7 @@ export default {
 
             this.user=user;
 
-            console.log(uid+"\t"+email);
+           
         } else {
             // User is signed out
             // ...

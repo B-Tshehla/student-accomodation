@@ -56,8 +56,8 @@ export default {
 
         data() {
             return {
-                email:null,
-                password:null,
+                email:'',
+                password:'',
                 errorCode:'hey'
             }
         },
@@ -82,7 +82,7 @@ export default {
                 .then((userCredential) => {
                     // Signed in 
                     const user = userCredential.user;
-                    console.log(user);
+                  
                     this.$router.push('/');
                     // ...
                 })
