@@ -33,13 +33,7 @@
             
    </b-form>
 
-    <b-modal ref="my-modal" hide-footer title="error message">
-      <div class="d-block  text-center">
-        <h3>{{"hey"}}</h3>
-      </div>
-      <b-button class="mt-3" variant="outline-danger" block @click="hideModal">Close Me</b-button>
-      
-    </b-modal>
+ 
 
 </div>
     
@@ -75,7 +69,7 @@ export default {
             var email=data.email;
             var password=data.password;
                 
-                this.$refs['my-modal'].show()
+              
 
             const auth = getAuth();
             signInWithEmailAndPassword(auth, email, password)
@@ -97,9 +91,7 @@ export default {
                 
 
         },
-        hideModal() {
-        this.$refs['my-modal'].hide();
-        }
+      
 
 
     }

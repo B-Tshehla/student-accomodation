@@ -10,7 +10,7 @@
 
                 <div class="form-group">
                         <label>First Name:</label>
-                        <input type="text" class="form-control" v-model="fName" placeholder="First Name">
+                        <input type="text" class="form-control"   v-model="fName" placeholder="First Name">
                     </div>
 
                 <div class="form-group">
@@ -125,9 +125,10 @@
 
 <script>
 
-//import { collection, addDoc } from "firebase/firestore"; 
-import { doc, setDoc } from "firebase/firestore"; 
+
+import { doc, setDoc,getDoc } from "firebase/firestore"; 
 import { getFirestore } from "firebase/firestore";
+
 
 
 export default {
@@ -137,8 +138,8 @@ export default {
     data() {
       return {
         tabIndex: 1,
-        firstName:'',
-        lastName:'',
+        fName:'',
+        lName:'',
         idNum:'',
         conNum:'',
         street:'',
@@ -146,12 +147,17 @@ export default {
         pCode:'',
         province:'',
         kfName:'',
-        kflName:'',
+        klName:'',
         kconNum:'',
         realation:'',
         medHistory:''
       }
     },
+      created: function () {
+    // `this` points to the vm instance
+      console.log("Created");
+    this.handleUpdate();
+  },
 
     methods: {
 
@@ -183,11 +189,39 @@ export default {
                 kconNum:this.kconNum,
                 realation:this.realation,
                 medHistory:this.medHistory
-         
+                
         });
- 
+            console.log("Submitted");
       },
+      async  handleUpdate(){
+            const db = getFirestore();
+            const userId=this.user.uid;
+            const docRef = doc(db, "users", userId);
+            const docSnap = await getDoc(docRef);
 
+            if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+                  this.fName=docSnap.data().firstName;
+                  this.lName=docSnap.data().lastName;
+                  this.idNum=docSnap.data().idNum;
+                  this.conNum=docSnap.data().conNum;
+                  this.street=docSnap.data().street;
+                  this.suburb=docSnap.data().suburb;
+                  this.pCode=docSnap.data().pCode;
+                  this.province=docSnap.data().province;
+                  this.kfName=docSnap.data().kfName;
+                  this.klName=docSnap.data().klName;
+                  this.kconNum=docSnap.data().kconNum;
+                  this.realation=docSnap.data().realation;
+                  this.medHistory=docSnap.data().medHistory;
+
+            
+            } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+            }
+           
+      }
 
     }
 }
