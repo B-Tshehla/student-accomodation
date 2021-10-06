@@ -7,8 +7,11 @@
       <div class="px-3 py-2">
 
           <b-img src="https://picsum.photos/500/500/?image=54" fluid thumbnail rounded="circle"></b-img>
+          
+          <br>
+        
         <h5 class="card-title">Personal Details</h5>
-                            <br>
+                            
                             <p class="card-text">
                                <b> Name </b>:
                                {{this.firstName}}
@@ -25,9 +28,9 @@
                                 <b>Contact Number</b>:
                                 {{conNum}}
                             </p>
-
+                              <br>
                             <h5 class="card-title">Address Information</h5>
-                            <br>
+                              <br>
                               <p class="card-text">
                                <b> Street</b>:
                                 {{street}}
@@ -79,7 +82,7 @@ export default {
       props:['user'],
         created: function () {
     // `this` points to the vm instance
-  
+      console.log("Created");
     this.handleUser();
   },
     data() {

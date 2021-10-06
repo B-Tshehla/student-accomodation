@@ -6,7 +6,8 @@ import Register from './components/Register.vue'
 import Profile from './components/Profile.vue'
 import Message  from './components/alert.vue'
 import Upload   from './components/Upload.vue'
-import  SideBar from './components/SideBar'
+import  SideBar from './components/SideBar.vue'
+import ManageUser from './components/userManagement.vue'
 
 Vue.use(Router)
 
@@ -20,7 +21,7 @@ export default new Router({
         {path:'/alert',component:Message},
         {path:'/Upload',component:Upload},
         {path:'/SideBar',component:SideBar},
-        
+        {path:'/ManageUser',component:ManageUser}
         
 
     ]
