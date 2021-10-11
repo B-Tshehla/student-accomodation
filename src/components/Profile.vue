@@ -101,7 +101,12 @@
                     <label  class="form-label">Profile Picture</label>
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="inputGroupFile01">Upload</label>
-                            <input type="file" class="form-control" id="inputGroupFile01" accept="image/*">
+                            <input type="file" 
+                            class="form-control" 
+                             @change="previewFiles"
+                             ref="myFiles"
+                            id="inputGroupFile01" 
+                            accept="image/*">
                         </div>
                 </div>
             </form>
@@ -128,6 +133,7 @@
 
 import { doc, setDoc,getDoc } from "firebase/firestore"; 
 import { getFirestore } from "firebase/firestore";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 
 
@@ -150,7 +156,8 @@ export default {
         klName:'',
         kconNum:'',
         realation:'',
-        medHistory:''
+        medHistory:'',
+        files: []
       }
     },
       created: function () {
@@ -173,6 +180,12 @@ export default {
 
         const db = getFirestore();
         const userId=this.user.uid;
+        const storageRef = ref(storage, '/images/profile');
+        const storage = getStorage();
+       
+       
+
+
         // Add a new document in collection "users"
         await setDoc(doc(db, "users", userId), {
 
@@ -191,13 +204,23 @@ export default {
                 medHistory:this.medHistory
                 
         });
+        // 'file' comes from the Blob or File API
+                    uploadBytes(storageRef,this.files[0]).then((snapshot) => {
+                    console.log('Uploaded a blob or file!');
+                    });
+            
             console.log("Submitted");
       },
+          previewFiles() {
+            this.files = this.$refs.myFiles.files;
+            console.log(this.files[0]);
+        },
       async  handleUpdate(){
             const db = getFirestore();
             const userId=this.user.uid;
             const docRef = doc(db, "users", userId);
             const docSnap = await getDoc(docRef);
+           
 
             if (docSnap.exists()) {
             console.log("Document data:", docSnap.data());
@@ -215,7 +238,7 @@ export default {
                   this.realation=docSnap.data().realation;
                   this.medHistory=docSnap.data().medHistory;
 
-            
+                  
             } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");

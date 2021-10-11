@@ -8,6 +8,7 @@ import Message  from './components/alert.vue'
 import Upload   from './components/Upload.vue'
 import  SideBar from './components/SideBar.vue'
 import ManageUser from './components/userManagement.vue'
+import Test from './components/Test.vue'
 
 Vue.use(Router)
 
@@ -21,7 +22,8 @@ export default new Router({
         {path:'/alert',component:Message},
         {path:'/Upload',component:Upload},
         {path:'/SideBar',component:SideBar},
-        {path:'/ManageUser',component:ManageUser}
+        {path:'/ManageUser',component:ManageUser},
+        {path:'/Test',component:Test}
         
 
     ]
