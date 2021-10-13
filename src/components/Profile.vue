@@ -100,7 +100,6 @@
                 <div>
                     <label  class="form-label">Profile Picture</label>
                         <div class="input-group mb-3">
-                            <label class="input-group-text" for="inputGroupFile01">Upload</label>
                             <input type="file" 
                             class="form-control" 
                              @change="previewFiles"
@@ -180,9 +179,9 @@ export default {
 
         const db = getFirestore();
         const userId=this.user.uid;
-        const storageRef = ref(storage, '/images/profile');
         const storage = getStorage();
-       
+        const storageRef = ref(storage, '/images/profile');
+        
        
 
 
@@ -207,14 +206,17 @@ export default {
         // 'file' comes from the Blob or File API
                     uploadBytes(storageRef,this.files[0]).then((snapshot) => {
                     console.log('Uploaded a blob or file!');
+                     this.$router.push('/upload');
                     });
             
             console.log("Submitted");
+            
       },
           previewFiles() {
             this.files = this.$refs.myFiles.files;
             console.log(this.files[0]);
         },
+
       async  handleUpdate(){
             const db = getFirestore();
             const userId=this.user.uid;
