@@ -6,7 +6,7 @@
     shadow>
       <div class="px-3 py-2">
 
-          <b-img src="https://picsum.photos/500/500/?image=54" fluid thumbnail rounded="circle"></b-img>
+          <b-img v-bind:src="this.profile" fluid thumbnail rounded="circle"></b-img>
           
           <br>
         
@@ -99,7 +99,8 @@ export default {
             klName:'',
             kconNum:'',
             realation:'',
-            medHistory:''
+            medHistory:'',
+            profile:null,
         }
     },
     methods:{
@@ -124,6 +125,7 @@ export default {
             this.kconNum=docSnap.data().kconNum;
             this.realation=docSnap.data().realation;
             this.medHistory=docSnap.data().medHistory;
+             this.profile=docSnap.data().profile;
             
             } else {
             // doc.data() will be undefined in this case

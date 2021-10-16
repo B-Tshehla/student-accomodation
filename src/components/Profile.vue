@@ -132,9 +132,7 @@
 
 import { doc, setDoc,getDoc } from "firebase/firestore"; 
 import { getFirestore } from "firebase/firestore";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
-
-
+import { getStorage, ref,uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 export default {
 
@@ -156,6 +154,7 @@ export default {
         kconNum:'',
         realation:'',
         medHistory:'',
+        profile:null,
         files: []
       }
     },
@@ -175,42 +174,15 @@ export default {
         }
       },
 
-     async handleSubmit(){
+      handleSubmit(){
 
-        const db = getFirestore();
-        const userId=this.user.uid;
-        const storage = getStorage();
-        const storageRef = ref(storage, '/images/'+userId);
-        
-       
-
-
-        // Add a new document in collection "users"
-        await setDoc(doc(db, "users", userId), {
-
-                firstName:this.fName,
-                lastName:this.lName,
-                idNum:this.idNum,
-                conNum:this.conNum,
-                street:this.street,
-                suburb:this.suburb,
-                pCode:this.pCode,
-                province:this.province,
-                kfName:this.kfName,
-                klName:this.klName, 
-                kconNum:this.kconNum,
-                realation:this.realation,
-                medHistory:this.medHistory
-                
-        });
-        // 'file' comes from the Blob or File API
-                    uploadBytes(storageRef,this.files[0]).then((snapshot) => {
-                    console.log('Uploaded a blob or file!');
-                     this.$router.push('/upload');
-                    });
-            
-            console.log("Submitted");
-            
+         if(this.files[0]!=null){
+           this.postProfile();
+         }else
+         {
+           this.handleUpload();
+         }
+             
       },
           previewFiles() {
             this.files = this.$refs.myFiles.files;
@@ -246,7 +218,73 @@ export default {
             console.log("No such document!");
             }
            
-      }
+      },postProfile(){
+         
+            const userId=this.user.uid;
+            const storage = getStorage();
+            const storageRef = ref(storage, 'images/'+userId);
+
+            const uploadTask = uploadBytesResumable(storageRef, this.files[0]);
+
+            // Register three observers:
+            // 1. 'state_changed' observer, called any time the state changes
+            // 2. Error observer, called on failure
+            // 3. Completion observer, called on successful completion
+            uploadTask.on('state_changed', 
+              (snapshot) => {
+                // Observe state change events such as progress, pause, and resume
+                // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log('Upload is ' + progress + '% done');
+                switch (snapshot.state) {
+                  case 'paused':
+                    console.log('Upload is paused');
+                    break;
+                  case 'running':
+                    console.log('Upload is running');
+                    break;
+                }
+              }, 
+              (error) => {
+                // Handle unsuccessful uploads
+              }, 
+              () => {
+                // Handle successful uploads on complete
+                // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                  this.profile=downloadURL;
+                  console.log('File available at', downloadURL);
+                  this.handleUpload();
+                });
+              }
+            );
+
+      },
+     async handleUpload(){
+            const db = getFirestore();
+            const userId=this.user.uid;
+         // Add a new document in collection "users"
+        await setDoc(doc(db, "users", userId), {
+
+                firstName:this.fName,
+                lastName:this.lName,
+                idNum:this.idNum,
+                conNum:this.conNum,
+                street:this.street,
+                suburb:this.suburb,
+                pCode:this.pCode,
+                province:this.province,
+                kfName:this.kfName,
+                klName:this.klName, 
+                kconNum:this.kconNum,
+                realation:this.realation,
+                medHistory:this.medHistory,
+                profile:this.profile
+                
+        });
+         console.log("Submitted");
+         this.$router.push('/upload');
+      },
 
     }
 }
