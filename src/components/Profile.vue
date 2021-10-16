@@ -180,7 +180,7 @@ export default {
         const db = getFirestore();
         const userId=this.user.uid;
         const storage = getStorage();
-        const storageRef = ref(storage, '/images/profile');
+        const storageRef = ref(storage, '/images/'+userId);
         
        
 
