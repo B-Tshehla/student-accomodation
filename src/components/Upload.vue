@@ -45,55 +45,204 @@
                 accept="application/PDF">
             </div>
         </div>
-
-        <button @click="upload">upload</button>
+              <b-button variant="primary" @click="upload">Upload</b-button>
   </div>
 </template>
 <script>
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+ import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 export default {
   name:'Upload',
   props:['user'],
   data() {
     return {
-      dproofReg:[],
+      dproofReg:null,
       dnfAppLet:null,
       dproofAdd:null,
       didCopy:null,
-      files:[]
+      linkReg:null,
+      linkAppLet:null,
+      linkProofAdd:null,
+      linkIdCopy:null,
+      
     }
   },
   methods:{
       proofReg(){
-         this.files = this.$refs.proofReg.files[0];
-         console.log(this.files);
-         console.log("Proof of Registration");
-            const storage = getStorage();
-            const storageRef = ref(storage, '/proof/proof');
+         this.dproofReg = this.$refs.proofReg.files[0];
+        
 
-        // 'file' comes from the Blob or File API
-        uploadBytes(storageRef, this.files).then((snapshot) => {
-        console.log('Uploaded a blob or file!');
-        });
       },
       nfAppLet(){
-        this.dnfAppLet=this.$refs.nfAppLet.files;
-        console.log(this.dnfAppLet);
+        this.dnfAppLet=this.$refs.nfAppLet.files[0];
+        
       },
       proofAdd(){
-        this.dproofAdd=this.$refs.proofAdd.files;
-        console.log(this.dproofAdd);
+        this.dproofAdd=this.$refs.proofAdd.files[0];
+        
       },
       idCopy(){
-        this.didCopy=this.$refs.idCopy.files
-        console.log(this.didCopy);
+        this.didCopy=this.$refs.idCopy.files[0]
+        
       },
       upload(){
         
+      this.uploadProofReg();
+      this.uploadNfProof();
+      this.uploadProofAdd();
+      this.uploadIdCopy();
+      this.setSuppLink();
+      
+      },
+      uploadProofReg(){
+          console.log(this.dproofReg);
+         
+        
+        const storage = getStorage();
+        const storageRef = ref(storage, 'ProofRegistration/'+this.user.uid);
 
-    
-      }
+        const uploadTask = uploadBytesResumable(storageRef,this.dproofReg);
+
+      
+        uploadTask.on('state_changed', 
+          (snapshot) => {
+          
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+            switch (snapshot.state) {
+              case 'paused':
+                console.log('Upload is paused');
+                break;
+              case 'running':
+                console.log('Upload is running');
+                break;
+            }
+          }, 
+          (error) => {
+            // Handle unsuccessful uploads
+          }, 
+          () => {
+            // Handle successful uploads on complete
+            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              console.log('File available at', downloadURL);
+              this.linkReg=downloadURL;
+            });
+          }
+        );
+      },
+      uploadNfProof(){
+        console.log(this.dnfAppLet);
+        
+        const storage = getStorage();
+        const storageRef = ref(storage, 'NfsasApproval/'+this.user.uid);
+
+        const uploadTask = uploadBytesResumable(storageRef,this.dnfAppLet);
+
+      
+        uploadTask.on('state_changed', 
+          (snapshot) => {
+        
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+            switch (snapshot.state) {
+              case 'paused':
+                console.log('Upload is paused');
+                break;
+              case 'running':
+                console.log('Upload is running');
+                break;
+            }
+          }, 
+          (error) => {
+            // Handle unsuccessful uploads
+          }, 
+          () => {
+            // Handle successful uploads on complete
+            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              console.log('File available at', downloadURL);
+              this.linkAppLet= downloadURL;
+            });
+          }
+        );
+      },
+      uploadProofAdd(){
+        console.log(this.dproofAdd);
+
+        const storage = getStorage();
+        const storageRef = ref(storage, 'ProofAddress/'+this.user.uid);
+
+        const uploadTask = uploadBytesResumable(storageRef,this.dproofAdd);
+
+        uploadTask.on('state_changed', 
+          (snapshot) => {
+
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+            switch (snapshot.state) {
+              case 'paused':
+                console.log('Upload is paused');
+                break;
+              case 'running':
+                console.log('Upload is running');
+                break;
+            }
+          }, 
+          (error) => {
+            // Handle unsuccessful uploads
+          }, 
+          () => {
+            // Handle successful uploads on complete
+            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              console.log('File available at', downloadURL);
+              this.linkProofAdd=downloadURL;
+            });
+          }
+        );
+      },
+      uploadIdCopy(){
+        console.log(this.didCopy);
+        const storage = getStorage();
+        const storageRef = ref(storage, 'IdCopy/'+this.user.uid);
+
+        const uploadTask = uploadBytesResumable(storageRef,this.didCopy);
+
+
+        uploadTask.on('state_changed', 
+          (snapshot) => {
+         
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+            switch (snapshot.state) {
+              case 'paused':
+                console.log('Upload is paused');
+                break;
+              case 'running':
+                console.log('Upload is running');
+                break;
+            }
+          }, 
+          (error) => {
+            // Handle unsuccessful uploads
+          }, 
+          () => {
+            // Handle successful uploads on complete
+            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              console.log('File available at', downloadURL);
+              this.linkIdCopy=downloadURL;
+            });
+          }
+        );
+      },
+      setSuppLink(){
+        console.log(this.linkIdCopy);
+        console.log(this.linkReg);
+        console.log(this.linkProofAdd);
+        console.log(this.linkAppLet);
+      },
 
 
 
