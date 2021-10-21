@@ -52,7 +52,7 @@
 
 <script>
 
-   import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+   import { getAuth, createUserWithEmailAndPassword,sendEmailVerification,signOut } from "firebase/auth";
    
 
 
@@ -63,9 +63,9 @@ export default {
         data() {
             return {
                
-                email:'',
-                password:'',
-                password_cornfirm:''
+                email:null,
+                password:null,
+                password_cornfirm:null
             }
         },
         
@@ -89,15 +89,26 @@ export default {
                     var email=data.email;
                     var password=data.password;
 
+                    
+
                 createUserWithEmailAndPassword(auth, email,password)
-                
                 .then((userCredential) => {
                     // Signed in 
                   const  user = userCredential.user;
                     // ...
+                        const auth = getAuth();
+                        sendEmailVerification(auth.currentUser)
+                        .then(() => {
+                            // Email verification sent!
+                            // ...
+                             alert("An email has been sent to "+email+". Please verify your email address");
+                             this.signOut();
+                        });
+
                     console.log("You have signed up");
-                    console.log(user.email);
-                    this.$router.push('/Login');
+                    
+                
+            
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -107,8 +118,20 @@ export default {
                     console.log(errorMessage);
                 });
            }
-          
-        }
+
+
+        },
+        signOut(){
+        const auth = getAuth();
+          signOut(auth).then(() => {
+            // Sign-out successful.
+            location.reload(); 
+          }).catch((error) => {
+            // An error happened.
+            alert(error.message);
+          });
+      }
+     
     }
 }
 </script>

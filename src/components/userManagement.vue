@@ -19,6 +19,7 @@ export default {
                 // Email verification sent!
                 // ...
                 console.log("Email sent");
+               
             }); 
          }
      }

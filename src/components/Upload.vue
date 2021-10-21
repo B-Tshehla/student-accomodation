@@ -11,6 +11,7 @@
                 id="inputGroupFile01" 
                 accept="application/PDF">
             </div>
+            <b-progress :value=" prgProofReg" v-if="prgProofReg" class="w-75 mb-2" height="4px"></b-progress>
         </div>
                <div>
           <label  class="form-label">NFSAS Approval Letter</label>
@@ -22,6 +23,7 @@
                 id="inputGroupFile01" 
                 accept="application/PDF">
             </div>
+             <b-progress :value="prgNfAppLet" v-if="prgNfAppLet" class="w-75 mb-2" height="4px"></b-progress>
         </div>
                <div>
           <label  class="form-label">Proof Of Physical Address</label>
@@ -33,6 +35,7 @@
                 id="inputGroupFile01" 
                 accept="application/PDF">
             </div>
+            <b-progress :value="prgProofAdd" v-if="prgProofAdd" class="w-75 mb-2" height="4px"></b-progress>
         </div>
                <div>
           <label  class="form-label"> ID Copy</label>
@@ -44,6 +47,7 @@
                 id="inputGroupFile01" 
                 accept="application/PDF">
             </div>
+            <b-progress :value="prgIdCopy" v-if="prgIdCopy" class="w-75 mb-2" height="4px"></b-progress>
         </div>
               <b-button variant="primary" @click="upload">Upload</b-button>
   </div>
@@ -64,6 +68,10 @@ export default {
       linkAppLet:null,
       linkProofAdd:null,
       linkIdCopy:null,
+      prgProofReg:null,
+      prgNfAppLet:null,
+      prgProofAdd:null,
+      prgIdCopy:null,
       
     }
   },
@@ -108,6 +116,7 @@ export default {
           (snapshot) => {
           
             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            this.prgProofReg=progress;
             console.log('Upload is ' + progress + '% done');
             switch (snapshot.state) {
               case 'paused':
@@ -144,6 +153,7 @@ export default {
           (snapshot) => {
         
             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            this.prgNfAppLet=progress;
             console.log('Upload is ' + progress + '% done');
             switch (snapshot.state) {
               case 'paused':
@@ -179,6 +189,7 @@ export default {
           (snapshot) => {
 
             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            this.prgProofAdd=progress;
             console.log('Upload is ' + progress + '% done');
             switch (snapshot.state) {
               case 'paused':
@@ -214,6 +225,7 @@ export default {
           (snapshot) => {
          
             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            this.prgIdCopy=progress;
             console.log('Upload is ' + progress + '% done');
             switch (snapshot.state) {
               case 'paused':

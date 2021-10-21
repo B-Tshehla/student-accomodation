@@ -107,6 +107,7 @@
                             id="inputGroupFile01" 
                             accept="image/*">
                         </div>
+                      <b-progress :value="prgProfile" v-if="prgProfile" class="w-75 mb-2" height="4px"></b-progress>
                 </div>
             </form>
            <b-button variant="primary" @click="handleSubmit">Submit</b-button>
@@ -155,7 +156,8 @@ export default {
         realation:'',
         medHistory:'',
         profile:null,
-        files: []
+        files: [],
+        prgProfile:null,
       }
     },
       created: function () {
@@ -226,15 +228,12 @@ export default {
 
             const uploadTask = uploadBytesResumable(storageRef, this.files[0]);
 
-            // Register three observers:
-            // 1. 'state_changed' observer, called any time the state changes
-            // 2. Error observer, called on failure
-            // 3. Completion observer, called on successful completion
+            
             uploadTask.on('state_changed', 
               (snapshot) => {
-                // Observe state change events such as progress, pause, and resume
-                // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+
                 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                this.prgProfile=progress;
                 console.log('Upload is ' + progress + '% done');
                 switch (snapshot.state) {
                   case 'paused':
