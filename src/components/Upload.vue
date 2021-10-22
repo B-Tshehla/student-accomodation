@@ -54,6 +54,8 @@
 </template>
 <script>
  import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+  import { doc, setDoc,getFirestore } from "firebase/firestore"; 
+
 
 export default {
   name:'Upload',
@@ -99,7 +101,7 @@ export default {
       this.uploadNfProof();
       this.uploadProofAdd();
       this.uploadIdCopy();
-      this.setSuppLink();
+   
       
       },
       uploadProofReg(){
@@ -136,6 +138,7 @@ export default {
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
               console.log('File available at', downloadURL);
               this.linkReg=downloadURL;
+              this.linkDataSupp();
             });
           }
         );
@@ -173,6 +176,7 @@ export default {
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
               console.log('File available at', downloadURL);
               this.linkAppLet= downloadURL;
+              this.linkDataSupp();
             });
           }
         );
@@ -209,6 +213,7 @@ export default {
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
               console.log('File available at', downloadURL);
               this.linkProofAdd=downloadURL;
+              this.linkDataSupp();
             });
           }
         );
@@ -245,16 +250,25 @@ export default {
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
               console.log('File available at', downloadURL);
               this.linkIdCopy=downloadURL;
+              this.linkDataSupp();
             });
           }
         );
       },
-      setSuppLink(){
-        console.log(this.linkIdCopy);
-        console.log(this.linkReg);
-        console.log(this.linkProofAdd);
-        console.log(this.linkAppLet);
-      },
+      async linkDataSupp(){
+
+          const db = getFirestore();
+
+        if(this.linkReg&&this.linkProofAdd&&this.linkAppLet&&this.linkIdCopy){
+        await setDoc(doc(db, "suporting", this.user.uid), {
+            proofOfReg:this.linkReg,
+            proofOfAddress:this.linkProofAdd,
+            nfsasApproval:this.linkAppLet,
+            idCopy:this.linkIdCopy,
+          });
+        }
+
+      }
 
 
 
