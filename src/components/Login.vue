@@ -26,7 +26,10 @@
      
        
     </div>
-
+    <div>
+    <a class="pass" @click="resetPass">forgort password</a>
+    </div>
+    <br>
     <div>
             <b-button block variant="primary" @click="handleSubmit">Submit</b-button>
     </div>
@@ -41,7 +44,8 @@
 
 <script>
 
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword,sendPasswordResetEmail } from "firebase/auth";
+
 
 export default {
     name:'Login',
@@ -50,9 +54,9 @@ export default {
 
         data() {
             return {
-                email:'',
-                password:'',
-                errorCode:'hey'
+                email:null,
+                password:null,
+                
             }
         },
 
@@ -91,6 +95,26 @@ export default {
                 
 
         },
+        resetPass(){
+           
+            
+
+            const auth = getAuth();
+            const email = "boitumelotshehla@gmail.com";
+            sendPasswordResetEmail(auth, email)
+            .then(() => {
+                // Password reset email sent!
+                // ..
+                 console.log("password")
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+
+                console.log(errorMessage)
+                // ..
+  });
+        },
       
 
 
@@ -104,6 +128,12 @@ export default {
         padding-bottom: 5px;
         padding-top: 5px;
         size: 2em   
+    }
+    .pass{
+        cursor: pointer;
+        text-decoration: none;
+        color: #7f7d7d;
+        text-align: right;
     }
 
   
