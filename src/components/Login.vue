@@ -79,17 +79,17 @@ export default {
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     // Signed in 
-                    const user = userCredential.user;
+              
                   
                     this.$router.push('/');
                     // ...
                 })
                 .catch((error) => {
                     const errorCode = error.code;
-                   // const errorMessage = error.message;
+                   
                     this.errorCode=errorCode;
 
-                  //  alert(errorCode+"\t\t"+errorMessage);
+                   alert(errorCode);
                 });
 
                 
@@ -109,9 +109,9 @@ export default {
             })
             .catch((error) => {
                 const errorCode = error.code;
-                const errorMessage = error.message;
+                
 
-                console.log(errorMessage)
+                alert(errorCode);
                 // ..
   });
         },

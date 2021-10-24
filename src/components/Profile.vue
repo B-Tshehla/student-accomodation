@@ -4,7 +4,7 @@
     <!-- Tabs with card integration -->
     <b-card no-body>
       <b-tabs v-model="tabIndex" small card>
-        <b-tab title="First" :title-link-class="linkClass(0)" active>
+        <b-tab title="Personal Info" :title-link-class="linkClass(0)" active>
             <form >
                 <h3>Personal information </h3>
 
@@ -34,7 +34,7 @@
 
 
         </b-tab>
-        <b-tab title="Second" :title-link-class="linkClass(1)">
+        <b-tab title="Address Info" :title-link-class="linkClass(1)">
             <form>
                 <h3>Home Address</h3>
 
@@ -61,9 +61,9 @@
                
             </form>
         </b-tab>
-        <b-tab title="third" :title-link-class="linkClass(2)">
+        <b-tab title="Next Of Kin" :title-link-class="linkClass(2)">
              <form>
-                    <h3>Next Of Kin</h3>
+                    <h3>Primary Next Of Kin</h3>
 
                     <div class="form-group">
                             <label>First Name:</label>
@@ -79,17 +79,53 @@
                             <label class="form-lable">Contact Number:</label>
                             <input type="text" class="form-control" v-model="kconNum" placeholder="Contact details">
                         </div>
+                      <div class="form-group">
+                            <label class="form-lable">Work Contact:</label>
+                            <input type="text" class="form-control" v-model="kconNum" placeholder="Contact details">
+                        </div>
                     
                     <div class="form-group">
                             <label class="form-label">Relationship:</label>
-                            <input type="text" class="form-control" v-model="realation" placeholder="Relationship">
+                            <input type="text" class="form-control" v-model="krealation" placeholder="Relationship">
                         </div> 
                 
                 
                 </form>
 
         </b-tab>
-        <b-tab title="last" :title-link-class="linkClass(3)">
+         <b-tab title="Next Of Kin" :title-link-class="linkClass(3)">
+             <form>
+                    <h3>Secondary Next Of Kin</h3>
+
+                    <div class="form-group">
+                            <label>First Name:</label>
+                            <input type="text" class="form-control" v-model="seckfName" placeholder="First Name">
+                        </div>
+
+                    <div class="form-group">
+                            <label class="form-label">Last Name:</label>
+                            <input type="text" class="form-control" v-model="secklName" placeholder="Last Name">
+                        </div>
+
+                    <div class="form-group">
+                            <label class="form-lable">Contact Number:</label>
+                            <input type="text" class="form-control" v-model="seckconNum" placeholder="Contact details">
+                        </div>
+                         <div class="form-group">
+                            <label class="form-lable">Work Contact:</label>
+                            <input type="text" class="form-control" v-model="seckconNum" placeholder="Contact details">
+                        </div>
+                    
+                    <div class="form-group">
+                            <label class="form-label">Relationship:</label>
+                            <input type="text" class="form-control" v-model="seckrealation" placeholder="Relationship">
+                        </div> 
+                
+                
+                </form>
+
+        </b-tab>
+        <b-tab title="Medical History" :title-link-class="linkClass(4)">
              <form  @submit.prevent="handleSubmit">
                 <h3>Finish Up</h3>
                 <div >
@@ -153,7 +189,13 @@ export default {
         kfName:'',
         klName:'',
         kconNum:'',
-        realation:'',
+        kWorkCon:'',
+        krealation:'',
+        seckfName:'',
+        secklName:'',
+        seckconNum:'',
+        seckWorkCon:'',
+        seckrealation:'',
         medHistory:'',
         profile:null,
         files: [],
@@ -164,6 +206,7 @@ export default {
     // `this` points to the vm instance
       console.log("Created");
     this.handleUpdate();
+    
   },
 
     methods: {
@@ -211,8 +254,15 @@ export default {
                   this.kfName=docSnap.data().kfName;
                   this.klName=docSnap.data().klName;
                   this.kconNum=docSnap.data().kconNum;
-                  this.realation=docSnap.data().realation;
+                  this.krealation=docSnap.data().realation;
+                  this.seckfName=docSnap.data().seckfName;
+                  this.secklName=docSnap.data().secklName;
+                  this.seckconNum=docSnap.data().seckconNum;
+                  this.seckrealation=docSnap.data().secrealation;
                   this.medHistory=docSnap.data().medHistory;
+                  this.profile=docSnap.data().profile;
+                 
+                  this.dataHandling();
 
                   
             } else {
@@ -276,7 +326,11 @@ export default {
                 kfName:this.kfName,
                 klName:this.klName, 
                 kconNum:this.kconNum,
-                realation:this.realation,
+                realation:this.krealation,
+                seckfName:this.seckfName,
+                secklName:this.secklName, 
+                seckconNum:this.seckconNum,
+                secrealation:this.seckrealation,
                 medHistory:this.medHistory,
                 profile:this.profile
                 
@@ -284,6 +338,28 @@ export default {
          console.log("Submitted");
          this.$router.push('/upload');
       },
+      dataHandling(){
+      
+      this.initCap(this.fName);
+        
+        
+      },
+      initCap(param){
+        
+        var first ='';
+        var rest ='';
+
+        first=param.substr(0,1);
+        rest= param.substr(1,param.length);
+        
+        first.toLowerCase();
+        rest.toUpperCase();
+
+        
+        console.log(first+rest);
+
+      },
+
 
     }
 }

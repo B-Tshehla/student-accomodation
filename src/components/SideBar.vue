@@ -1,5 +1,19 @@
 <template>
   <div>
+
+      <div >
+        
+        <div v-if="user">
+            
+            
+               <h3>Welcome, please wait for admin to allocate a room for you </h3>
+
+        </div>
+        <div v-if="!user">
+            <h3>You are not logged in</h3> 
+
+        </div>
+    </div>
  
     <b-sidebar id="sidebar-1" 
     title="Profile" 
@@ -8,7 +22,7 @@
 
           <b-img v-bind:src="this.profile" fluid thumbnail rounded="circle"></b-img>
           
-          <br>
+          
         
         <h5 class="card-title">Personal Details</h5>
                             
@@ -28,9 +42,9 @@
                                 <b>Contact Number</b>:
                                 {{conNum}}
                             </p>
-                              <br>
+                              
                             <h5 class="card-title">Address Information</h5>
-                              <br>
+                              
                               <p class="card-text">
                                <b> Street</b>:
                                 {{street}}
@@ -47,8 +61,8 @@
                                <b> Province</b>:{{province}}
                             </p>
 
-                            <h5 class="card-title">Next Of Kin Information</h5>
-                           <br>
+                            <h5 class="card-title">Primary Next Of Kin Information</h5>
+                           
                             <p class="card-text">
  
                                <b> Name</b>:{{kfName}}
@@ -62,6 +76,24 @@
                             <p class="card-text">
                                <b> Realationship</b>:{{realation}}
                             </p>
+
+                              <h5 class="card-title">Secondary Next Of Kin Information</h5>
+                           
+                            <p class="card-text">
+ 
+                               <b> Name</b>:{{seckfName}}
+                            </p>
+                            <p class="card-text">
+                               <b> Surname</b>:{{secklName}}
+                            </p>
+                            <p class="card-text">
+                               <b> Contact Number</b>:{{seckconNum}}
+                            </p>
+                            <p class="card-text">
+                               <b> Realationship</b>:{{secrealation}}
+                            </p>
+
+
                             <p class="card-text">
                                <b> Medical History</b>:{{medHistory}}
                             </p>
@@ -99,6 +131,10 @@ export default {
             klName:'',
             kconNum:'',
             realation:'',
+            seckfName:'',
+            secklName:'',
+            seckconNum:'',
+            secrealation:'',
             medHistory:'',
             profile:null,
         }
@@ -124,8 +160,13 @@ export default {
             this.klName=docSnap.data().klName;
             this.kconNum=docSnap.data().kconNum;
             this.realation=docSnap.data().realation;
+            this.seckfName=docSnap.data().seckfName;
+            this.secklName=docSnap.data().secklName;
+            this.seckconNum=docSnap.data().seckconNum;
+            this.secrealation=docSnap.data().secrealation;
             this.medHistory=docSnap.data().medHistory;
-             this.profile=docSnap.data().profile;
+            this.profile=docSnap.data().profile;
+
             
             } else {
             // doc.data() will be undefined in this case

@@ -105,17 +105,17 @@ export default {
                              this.signOut();
                         });
 
-                    console.log("You have signed up");
+                  
                     
                 
             
                 })
                 .catch((error) => {
                     const errorCode = error.code;
-                    const errorMessage = error.message;
+                    
                     // ..
-                    alert(errorCode+"\t"+errorMessage);
-                    console.log(errorMessage);
+                    alert(errorCode);
+                    
                 });
            }
 

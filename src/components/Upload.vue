@@ -131,6 +131,7 @@ export default {
           }, 
           (error) => {
             // Handle unsuccessful uploads
+            alert(error);
           }, 
           () => {
             // Handle successful uploads on complete
@@ -169,6 +170,8 @@ export default {
           }, 
           (error) => {
             // Handle unsuccessful uploads
+
+            alert(error);
           }, 
           () => {
             // Handle successful uploads on complete
@@ -206,6 +209,7 @@ export default {
           }, 
           (error) => {
             // Handle unsuccessful uploads
+            alert(error);
           }, 
           () => {
             // Handle successful uploads on complete
@@ -243,6 +247,7 @@ export default {
           }, 
           (error) => {
             // Handle unsuccessful uploads
+            alert(error);
           }, 
           () => {
             // Handle successful uploads on complete
@@ -260,7 +265,7 @@ export default {
           const db = getFirestore();
 
         if(this.linkReg&&this.linkProofAdd&&this.linkAppLet&&this.linkIdCopy){
-        await setDoc(doc(db, "suporting", this.user.uid), {
+          await setDoc(doc(db, "suporting", this.user.uid), {
             proofOfReg:this.linkReg,
             proofOfAddress:this.linkProofAdd,
             nfsasApproval:this.linkAppLet,
