@@ -1,52 +1,54 @@
 <template>
 
-<div>
-  <b-form @submit.prevent>
-      <h3>Sign up</h3>
-      <div>
-            <label for="email">Email:</label>
-                <b-form-input  
-                    type="email" 
-                    id="email" 
-                    placeholder="Email"
-                    required
-                    v-model="email">
-                </b-form-input>
-                    <b-form-text id="password-help-block">
-                        We'll never share your email with anyone else.
-                    </b-form-text>
-      </div>
-      
-   
-    <div>
-        <label for="text-password">Password</label>
-        <b-form-input 
-        type="password" 
-        id="text-password" 
-        placeholder="Password"
-        v-model="password">
-        </b-form-input>
-        <b-form-text id="password-help-block">
-        Your password must be 8-20 characters long, contain letters and numbers, and must not
-        contain spaces, special characters, or emoji.
-        </b-form-text>
+<div class="auth-wrapper">    
+    <div class="auth-inner">
+        <b-form @submit.prevent>
+            <h3>Sign up</h3>
             <div>
-        <label for="text-password">Cornfirm Password</label>
-        <b-form-input 
-        type="password" 
-        id="text-password" 
-        placeholder="Cornfirm Password"
-        v-model=" password_cornfirm">
-        </b-form-input>
-       
+                    <label for="email">Email:</label>
+                        <b-form-input  
+                            type="email" 
+                            id="email" 
+                            placeholder="Email"
+                            required
+                            v-model="email">
+                        </b-form-input>
+                            <b-form-text id="password-help-block">
+                                We'll never share your email with anyone else.
+                            </b-form-text>
+            </div>
+            
+        
+            <div>
+                <label for="text-password">Password</label>
+                <b-form-input 
+                type="password" 
+                id="text-password" 
+                placeholder="Password"
+                v-model="password">
+                </b-form-input>
+                <b-form-text id="password-help-block">
+                Your password must be 8-20 characters long, contain letters and numbers, and must not
+                contain spaces, special characters, or emoji.
+                </b-form-text>
+                    <div>
+                <label for="text-password">Cornfirm Password</label>
+                <b-form-input 
+                type="password" 
+                id="text-password" 
+                placeholder="Cornfirm Password"
+                v-model=" password_cornfirm">
+                </b-form-input>
+            
+            </div>
+            </div>
+                <br>
+            <div>
+                    <b-button block variant="primary" @click="handleSubmit">Submit</b-button>
+            </div>
+            
+        </b-form>
     </div>
-    </div>
-        <br>
-    <div>
-            <b-button block variant="primary" @click="handleSubmit">Submit</b-button>
-    </div>
-    
-   </b-form>
 </div>
 </template>
 
@@ -105,6 +107,7 @@ export default {
                              this.signOut();
                         });
 
+                  
                   
                     
                 

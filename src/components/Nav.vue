@@ -27,10 +27,6 @@
             <em>User</em>
           </template>
           
-          
-          <b-dropdown-item >
-             <router-link v-b-toggle.sidebar-1 to="/SideBar" class="nav-link"> Profile </router-link>
-          </b-dropdown-item>
            <b-dropdown-item >
             <a href="/" @click="signOut"  class="nav-link">  Sign Out </a>
             </b-dropdown-item>

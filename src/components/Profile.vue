@@ -1,166 +1,168 @@
 <template>
 
- <div>
-    <!-- Tabs with card integration -->
-    <b-card no-body>
-      <b-tabs v-model="tabIndex" small card>
-        <b-tab title="Personal Info" :title-link-class="linkClass(0)" active>
-            <form >
-                <h3>Personal information </h3>
+ <div class="auth-wrapper-app">    
+        <div class="auth-inner-app">
+          <!-- Tabs with card integration -->
+          <b-card no-body>
+            <b-tabs v-model="tabIndex" small card>
+              <b-tab title="Personal Info" :title-link-class="linkClass(0)" active>
+                  <form >
+                      <h3>Personal information </h3>
 
-                <div class="form-group">
-                        <label>First Name:</label>
-                        <input type="text" class="form-control"   v-model="fName" placeholder="First Name">
-                    </div>
-
-                <div class="form-group">
-                        <label>Last Name:</label>
-                        <input type="Last Name" class="form-control" v-model="lName" placeholder="Last Name">
-                    </div>
-
-                <div class="form-group">
-                        <label>Identity Number:</label>
-                        <input type="text" class="form-control" v-model="idNum" placeholder="Identity Number">
-                    </div> 
-                <div class="form-group">
-                        <label>Contact Number:</label>
-                        <input type="text" class="form-control" v-model="conNum" placeholder="Contact Number">
-                    </div> 
-
-                
-
-               
-            </form>
-
-
-        </b-tab>
-        <b-tab title="Address Info" :title-link-class="linkClass(1)">
-            <form>
-                <h3>Home Address</h3>
-
-                <div class="form-group">
-                        <label>Street:</label>
-                        <input type="text" class="form-control" v-model="street" placeholder="Street">
-                    </div>
-
-                <div class="form-group">
-                        <label>Town/suburb:</label>
-                        <input type="Last Name" class="form-control" v-model="suburb" placeholder="Town/suburb">
-                    </div>
-
-                <div class="form-group">
-                        <label>postal code:</label>
-                        <input type="text" class="form-control" v-model="pCode" placeholder="postal code">
-                    </div>
-                
-                <div class="form-group">
-                        <label>province:</label>
-                        <input type="text" class="form-control" v-model="province" placeholder="province">
-                    </div>  
-                
-               
-            </form>
-        </b-tab>
-        <b-tab title="Next Of Kin" :title-link-class="linkClass(2)">
-             <form>
-                    <h3>Primary Next Of Kin</h3>
-
-                    <div class="form-group">
-                            <label>First Name:</label>
-                            <input type="text" class="form-control" v-model="kfName" placeholder="First Name">
-                        </div>
-
-                    <div class="form-group">
-                            <label class="form-label">Last Name:</label>
-                            <input type="text" class="form-control" v-model="klName" placeholder="Last Name">
-                        </div>
-
-                    <div class="form-group">
-                            <label class="form-lable">Contact Number:</label>
-                            <input type="text" class="form-control" v-model="kconNum" placeholder="Contact details">
-                        </div>
                       <div class="form-group">
-                            <label class="form-lable">Work Contact:</label>
-                            <input type="text" class="form-control" v-model="kconNum" placeholder="Contact details">
-                        </div>
+                              <label>First Name:</label>
+                              <input type="text" class="form-control"   v-model="fName" placeholder="First Name">
+                          </div>
+
+                      <div class="form-group">
+                              <label>Last Name:</label>
+                              <input type="Last Name" class="form-control" v-model="lName" placeholder="Last Name">
+                          </div>
+
+                      <div class="form-group">
+                              <label>Identity Number:</label>
+                              <input type="text" class="form-control" v-model="idNum" placeholder="Identity Number">
+                          </div> 
+                      <div class="form-group">
+                              <label>Contact Number:</label>
+                              <input type="text" class="form-control" v-model="conNum" placeholder="Contact Number">
+                          </div> 
+
+                      
+
                     
-                    <div class="form-group">
-                            <label class="form-label">Relationship:</label>
-                            <input type="text" class="form-control" v-model="krealation" placeholder="Relationship">
-                        </div> 
-                
-                
-                </form>
+                  </form>
 
-        </b-tab>
-         <b-tab title="Next Of Kin" :title-link-class="linkClass(3)">
-             <form>
-                    <h3>Secondary Next Of Kin</h3>
 
-                    <div class="form-group">
-                            <label>First Name:</label>
-                            <input type="text" class="form-control" v-model="seckfName" placeholder="First Name">
-                        </div>
+              </b-tab>
+              <b-tab title="Address Info" :title-link-class="linkClass(1)">
+                  <form>
+                      <h3>Home Address</h3>
 
-                    <div class="form-group">
-                            <label class="form-label">Last Name:</label>
-                            <input type="text" class="form-control" v-model="secklName" placeholder="Last Name">
-                        </div>
+                      <div class="form-group">
+                              <label>Street:</label>
+                              <input type="text" class="form-control" v-model="street" placeholder="Street">
+                          </div>
 
-                    <div class="form-group">
-                            <label class="form-lable">Contact Number:</label>
-                            <input type="text" class="form-control" v-model="seckconNum" placeholder="Contact details">
-                        </div>
-                         <div class="form-group">
-                            <label class="form-lable">Work Contact:</label>
-                            <input type="text" class="form-control" v-model="seckconNum" placeholder="Contact details">
-                        </div>
+                      <div class="form-group">
+                              <label>Town/suburb:</label>
+                              <input type="Last Name" class="form-control" v-model="suburb" placeholder="Town/suburb">
+                          </div>
+
+                      <div class="form-group">
+                              <label>postal code:</label>
+                              <input type="text" class="form-control" v-model="pCode" placeholder="postal code">
+                          </div>
+                      
+                      <div class="form-group">
+                              <label>province:</label>
+                              <input type="text" class="form-control" v-model="province" placeholder="province">
+                          </div>  
+                      
                     
-                    <div class="form-group">
-                            <label class="form-label">Relationship:</label>
-                            <input type="text" class="form-control" v-model="seckrealation" placeholder="Relationship">
-                        </div> 
-                
-                
-                </form>
+                  </form>
+              </b-tab>
+              <b-tab title="Next Of Kin 1" :title-link-class="linkClass(2)">
+                  <form>
+                          <h3>Primary Next Of Kin</h3>
 
-        </b-tab>
-        <b-tab title="Medical History" :title-link-class="linkClass(4)">
-             <form  @submit.prevent="handleSubmit">
-                <h3>Finish Up</h3>
-                <div >
-                    <label  class="form-label">Medical History</label>
-                    <textarea class="form-control" v-model="medHistory"  rows="3"></textarea>
-                </div> 
+                          <div class="form-group">
+                                  <label>First Name:</label>
+                                  <input type="text" class="form-control" v-model="kfName" placeholder="First Name">
+                              </div>
 
-                <div>
-                    <label  class="form-label">Profile Picture</label>
-                        <div class="input-group mb-3">
-                            <input type="file" 
-                            class="form-control" 
-                             @change="previewFiles"
-                             ref="myFiles"
-                            id="inputGroupFile01" 
-                            accept="image/*">
-                        </div>
-                      <b-progress :value="prgProfile" v-if="prgProfile" class="w-75 mb-2" height="4px"></b-progress>
-                </div>
-            </form>
-           <b-button variant="primary" @click="handleSubmit">Submit</b-button>
-        </b-tab>
-      </b-tabs>
-    </b-card>
+                          <div class="form-group">
+                                  <label class="form-label">Last Name:</label>
+                                  <input type="text" class="form-control" v-model="klName" placeholder="Last Name">
+                              </div>
 
-    <!-- Control buttons-->
-    <div class="text-center">
-      <b-button-group class="mt-2">
-        <b-button @click="tabIndex--">Previous</b-button>
-        <b-button @click="tabIndex++">Next</b-button>
-      </b-button-group>
+                          <div class="form-group">
+                                  <label class="form-lable">Contact Number:</label>
+                                  <input type="text" class="form-control" v-model="kconNum" placeholder="Contact details">
+                              </div>
+                            <div class="form-group">
+                                  <label class="form-lable">Work Contact:</label>
+                                  <input type="text" class="form-control" v-model="kconNum" placeholder="Contact details">
+                              </div>
+                          
+                          <div class="form-group">
+                                  <label class="form-label">Relationship:</label>
+                                  <input type="text" class="form-control" v-model="krealation" placeholder="Relationship">
+                              </div> 
+                      
+                      
+                      </form>
 
-      <div class="text-muted">Current Tab: {{ tabIndex+1 }}</div>
-    </div>
-  </div>
+              </b-tab>
+              <b-tab title="Next Of Kin" :title-link-class="linkClass(3)">
+                  <form>
+                          <h3>Secondary Next Of Kin</h3>
+
+                          <div class="form-group">
+                                  <label>First Name:</label>
+                                  <input type="text" class="form-control" v-model="seckfName" placeholder="First Name">
+                              </div>
+
+                          <div class="form-group">
+                                  <label class="form-label">Last Name:</label>
+                                  <input type="text" class="form-control" v-model="secklName" placeholder="Last Name">
+                              </div>
+
+                          <div class="form-group">
+                                  <label class="form-lable">Contact Number:</label>
+                                  <input type="text" class="form-control" v-model="seckconNum" placeholder="Contact details">
+                              </div>
+                              <div class="form-group">
+                                  <label class="form-lable">Work Contact:</label>
+                                  <input type="text" class="form-control" v-model="seckconNum" placeholder="Contact details">
+                              </div>
+                          
+                          <div class="form-group">
+                                  <label class="form-label">Relationship:</label>
+                                  <input type="text" class="form-control" v-model="seckrealation" placeholder="Relationship">
+                              </div> 
+                      
+                      
+                      </form>
+
+              </b-tab>
+              <b-tab title="Medical History" :title-link-class="linkClass(4)">
+                  <form  @submit.prevent="handleSubmit">
+                      <h3>Finish Up</h3>
+                      <div >
+                          <label  class="form-label">Medical History</label>
+                          <textarea class="form-control" v-model="medHistory"  rows="3"></textarea>
+                      </div> 
+
+                      <div>
+                          <label  class="form-label">Profile Picture</label>
+                              <div class="input-group mb-3">
+                                  <input type="file" 
+                                  class="form-control" 
+                                  @change="previewFiles"
+                                  ref="myFiles"
+                                  id="inputGroupFile01" 
+                                  accept="image/*">
+                              </div>
+                            <b-progress :value="prgProfile" v-if="prgProfile" class="w-75 mb-2" height="4px"></b-progress>
+                      </div>
+                  </form>
+                <b-button variant="primary" @click="handleSubmit">Submit</b-button>
+              </b-tab>
+            </b-tabs>
+          </b-card>
+
+          <!-- Control buttons-->
+          <div class="text-center">
+            <b-button-group class="mt-2">
+              <b-button @click="tabIndex--">Previous</b-button>
+              <b-button @click="tabIndex++">Next</b-button>
+            </b-button-group>
+
+            <div class="text-muted">Current Tab: {{ tabIndex+1 }}</div>
+          </div>
+        </div>
+ </div>
 
 </template>
 
@@ -364,3 +366,32 @@ export default {
     }
 }
 </script>
+<style>
+  .auth-wrapper-app{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: left;
+    padding-top: 50px;
+    }
+    .auth-inner-app{
+    width: 1200px;
+    max-width:100%;
+    margin: auto;
+    background-color: #ffffff;
+    box-shadow: 0px 14px 80px rgba( 34 ,35,58,0.2); 
+    padding: 40px 55px 45px 55px;
+    border-radius: 5px;
+    transition: all .3s;
+    }
+
+    .auth-wrapper-app .form-control:focus{
+    border-color: #167bff;
+    box-shadow: none;
+    }
+    .profile-pic{
+        width: 200px;
+        height: 240px;
+    }
+</style>
+

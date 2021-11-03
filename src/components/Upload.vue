@@ -1,56 +1,58 @@
 <template>
-  <div>
-    <h3>Upload Documents</h3>
-       <div>
-          <label  class="form-label">Proof Of Registration</label>
-            <div class="input-group mb-3">
-              <input type="file" 
-                class="form-control" 
-                @change="proofReg"
-                ref="proofReg"
-                id="inputGroupFile01" 
-                accept="application/PDF">
-            </div>
-            <b-progress :value=" prgProofReg" v-if="prgProofReg" class="w-75 mb-2" height="4px"></b-progress>
-        </div>
-               <div>
-          <label  class="form-label">NFSAS Approval Letter</label>
-            <div class="input-group mb-3">
-              <input type="file" 
-                class="form-control" 
-                @change="nfAppLet"
-                ref="nfAppLet"
-                id="inputGroupFile01" 
-                accept="application/PDF">
-            </div>
-             <b-progress :value="prgNfAppLet" v-if="prgNfAppLet" class="w-75 mb-2" height="4px"></b-progress>
-        </div>
-               <div>
-          <label  class="form-label">Proof Of Physical Address</label>
-            <div class="input-group mb-3">
-              <input type="file" 
-                class="form-control" 
-                @change="proofAdd"
-                ref="proofAdd"
-                id="inputGroupFile01" 
-                accept="application/PDF">
-            </div>
-            <b-progress :value="prgProofAdd" v-if="prgProofAdd" class="w-75 mb-2" height="4px"></b-progress>
-        </div>
-               <div>
-          <label  class="form-label"> ID Copy</label>
-            <div class="input-group mb-3">
-              <input type="file" 
-                class="form-control" 
-                @change="idCopy"
-                ref="idCopy"
-                id="inputGroupFile01" 
-                accept="application/PDF">
-            </div>
-            <b-progress :value="prgIdCopy" v-if="prgIdCopy" class="w-75 mb-2" height="4px"></b-progress>
-        </div>
-              <b-button variant="primary" @click="upload">Upload</b-button>
-  </div>
+ <div class="auth-wrapper-app">    
+    <div class="auth-inner-app">
+      <h3>Upload Documents</h3>
+        <div>
+            <label  class="form-label">Proof Of Registration</label>
+              <div class="input-group mb-3">
+                <input type="file" 
+                  class="form-control" 
+                  @change="proofReg"
+                  ref="proofReg"
+                  id="inputGroupFile01" 
+                  accept="application/PDF">
+              </div>
+              <b-progress :value=" prgProofReg" v-if="prgProofReg" class="w-75 mb-2" height="4px"></b-progress>
+          </div>
+                <div>
+            <label  class="form-label">NFSAS Approval Letter</label>
+              <div class="input-group mb-3">
+                <input type="file" 
+                  class="form-control" 
+                  @change="nfAppLet"
+                  ref="nfAppLet"
+                  id="inputGroupFile01" 
+                  accept="application/PDF">
+              </div>
+              <b-progress :value="prgNfAppLet" v-if="prgNfAppLet" class="w-75 mb-2" height="4px"></b-progress>
+          </div>
+                <div>
+            <label  class="form-label">Proof Of Physical Address</label>
+              <div class="input-group mb-3">
+                <input type="file" 
+                  class="form-control" 
+                  @change="proofAdd"
+                  ref="proofAdd"
+                  id="inputGroupFile01" 
+                  accept="application/PDF">
+              </div>
+              <b-progress :value="prgProofAdd" v-if="prgProofAdd" class="w-75 mb-2" height="4px"></b-progress>
+          </div>
+                <div>
+            <label  class="form-label"> ID Copy</label>
+              <div class="input-group mb-3">
+                <input type="file" 
+                  class="form-control" 
+                  @change="idCopy"
+                  ref="idCopy"
+                  id="inputGroupFile01" 
+                  accept="application/PDF">
+              </div>
+              <b-progress :value="prgIdCopy" v-if="prgIdCopy" class="w-75 mb-2" height="4px"></b-progress>
+          </div>
+                <b-button variant="primary" @click="upload">Upload</b-button>
+    </div>
+ </div>
 </template>
 <script>
  import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
