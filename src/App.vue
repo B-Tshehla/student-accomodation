@@ -33,8 +33,7 @@ export default {
         if (user) {
             // User is signed in, see docs for a list of available properties
             // https://firebase.google.com/docs/reference/js/firebase.User
-            const uid = user.uid;
-            const email= user.email;
+            
             // ...
 
             this.user=user;
@@ -62,12 +61,20 @@ export default {
     *{
       box-sizing: border-box;
     }
-
-  body{
+  /*html { 
+  background: url("assets//background.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}*/
+   body{
     background-image: url("assets//background.jpg")  !important;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+  }
+  body{
     min-height: 100vh;
     display: flex;
     font-weight: 400;

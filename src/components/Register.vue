@@ -67,7 +67,8 @@ export default {
                
                 email:null,
                 password:null,
-                password_cornfirm:null
+                password_cornfirm:null,
+                errorAlert:null
             }
         },
         
@@ -97,6 +98,7 @@ export default {
                 .then((userCredential) => {
                     // Signed in 
                   const  user = userCredential.user;
+                  console.log(user);
                     // ...
                         const auth = getAuth();
                         sendEmailVerification(auth.currentUser)
@@ -104,25 +106,17 @@ export default {
                             // Email verification sent!
                             // ...
                              alert("An email has been sent to "+email+". Please verify your email address");
-                             this.signOut();
+                              this.$router.push('/login');
                         });
-
-                  
-                  
-                    
-                
-            
                 })
                 .catch((error) => {
                     const errorCode = error.code;
-                    
+                    this.errorAlert=errorCode.substr(errorCode.indexOf("/")+1,errorCode.length);
                     // ..
-                    alert(errorCode);
+                    alert(this.errorAlert);
                     
                 });
            }
-
-
         },
         signOut(){
         const auth = getAuth();
@@ -130,10 +124,12 @@ export default {
             // Sign-out successful.
             location.reload(); 
           }).catch((error) => {
-            // An error happened.
-            alert(error.message);
+           const errorCode = error.code;
+                    this.errorAlert=errorCode.substr(errorCode.indexOf("/")+1,errorCode.length);
+                    // ..
+                    alert(this.errorAlert);
           });
-      }
+        }
      
     }
 }

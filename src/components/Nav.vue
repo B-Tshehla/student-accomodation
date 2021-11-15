@@ -73,12 +73,15 @@ export default {
         const auth = getAuth();
           signOut(auth).then(() => {
             // Sign-out successful.
-            
             alert("Succesfully signed out");
-            location.reload(); 
+            location.reload();
+            this.$router.push('/login'); 
           }).catch((error) => {
             // An error happened.
-            alert(error.message);
+           const errorCode = error.code;
+                    this.errorAlert=errorCode.substr(errorCode.indexOf("/")+1,errorCode.length);
+                    // ..
+                    alert(this.errorAlert);
           });
       }
     }
