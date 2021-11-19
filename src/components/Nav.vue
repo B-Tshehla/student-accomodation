@@ -83,6 +83,7 @@ export default {
                     // ..
                     alert(this.errorAlert);
           });
+          this.$router.push('/login'); 
       }
     }
 
